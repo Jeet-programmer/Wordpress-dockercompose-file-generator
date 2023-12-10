@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Docker Configuration Form</title>
+</head>
+<body>
+
+    <h2>Docker Configuration Form</h2>
+
+    <form id="dockerConfigForm">
+        <label for="dockerFileName">Name of Docker file:</label>
+        <input type="text" id="dockerFileName" name="dockerFileName" required><br>
+
+        <label for="webUiPort">Web UI Port:</label>
+        <input type="number" id="webUiPort" name="webUiPort" required><br>
+
+        <label for="databasePort">Database Port:</label>
+        <input type="number" id="databasePort" name="databasePort" required><br>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+name: faWSDSFBGDN_wp
+services:
+  app:
+    cpu_shares: 90
+    command: []
+    depends_on:
+      db:
+        condition: service_started
+        required: true
+    deploy:
+      resources:
+        limits:
+          memory: 5804M
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_PASSWORD=casaos
+      - WORDPRESS_DB_USER=casaos
+    image: wordpress:latest
+    labels:
+      icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/wordpress.png
+    ports:
+      - mode: ingress
+        target: 80
+        published: "30000"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/faWSDSFBGDN/html
+        target: /var/www/html
+        bind:
+          create_host_path: true
+    x-casaos:
+      envs:
+        - container: WORDPRESS_DB_HOST
+          description:
+            en_us: Database host
+        - container: WORDPRESS_DB_USER
+          description:
+            en_us: Database user
+        - container: WORDPRESS_DB_PASSWORD
+          description:
+            en_us: Database password
+        - container: WORDPRESS_DB_NAME
+          description:
+            en_us: Database name
+      ports:
+        - container: "80"
+          description:
+            en_us: "Container Port: 80"
+      volumes:
+        - container: /var/www/html
+          description:
+            en_us: "Container Path: /var/www/html"
+    devices: []
+    cap_add: []
+    networks:
+      - default
+    privileged: false
+    container_name: ""
+  db:
+    cpu_shares: 90
+    command: []
+    deploy:
+      resources:
+        limits:
+          memory: 5804M
+    environment:
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_PASSWORD=casaos
+      - MYSQL_ROOT_PASSWORD=casaos
+      - MYSQL_USER=casaos
+    image: mysql:5.7
+    labels:
+      icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/wordpress.png
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/faWSDSFBGDN/mysql
+        target: /var/lib/mysql
+        bind:
+          create_host_path: true
+    x-casaos:
+      envs:
+        - container: MYSQL_DATABASE
+          description:
+            en_us: Database name
+        - container: MYSQL_USER
+          description:
+            en_us: Database user
+        - container: MYSQL_PASSWORD
+          description:
+            en_us: Database password
+        - container: MYSQL_ROOT_PASSWORD
+          description:
+            en_us: Database root password
+      ports:
+        - container: "20000"
+          description:
+            en_us: "Container Port: 20000"
+      volumes:
+        - container: /var/lib/mysql
+          description:
+            en_us: "Container Path: /var/lib/mysql"
+    ports: []
+    devices: []
+    cap_add: []
+    networks:
+      - default
+    privileged: false
+    container_name: ""
+networks:
+  default:
+    name: faWSDSFBGDN_default
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+  author: self
+  category: self
+  hostname: ""
+  icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/wordpress.png
+  index: /
+  main: app
+  port_map: "30000"
+  scheme: http
+  store_app_id: big-bear-wordpress
+  tagline:
+    en_us: WordPress
+  thumbnail: ""
+  title:
+    custom: faWSDSFBGDN
+    en_us: WordPress
