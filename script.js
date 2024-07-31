@@ -8,7 +8,7 @@ function submitForm() {
     var queryParams = `?name=${encodeURIComponent(dockerFileName)}&web_port=${encodeURIComponent(webUiPort)}&db_port=${encodeURIComponent(databasePort)}`;
 
     // Send a GET request to the API to get the download URL
-    var apiUrl = 'https://wp-docker.jeetghosh3.repl.co/download/' + queryParams; // Replace with your actual API URL
+    var apiUrl = 'https://dockercompose-file-generator.onrender.com/download/' + queryParams; // Replace with your actual API URL
     window.location.href = apiUrl;
 
     var xhr = new XMLHttpRequest();
